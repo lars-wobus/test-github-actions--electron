@@ -3,7 +3,8 @@
 name: Build Electron App
 
 # Workaround until manual triggers will arrive.
-# When someones stars or unstars the repo, the action is triggered.
+# When someones stars the repo, the action is triggered.
+# To repeat the action one can unstar and star the repo again.
 # But, as you can see few lines below, only the project owner can fully create new app versions
 # See full example here: https://dev.to/s_abderemane/manual-trigger-with-github-actions-279e
 on:
@@ -18,10 +19,18 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
+      - name: Change directory
+        run: |
+          cd react-app
+          ls .
+          echo 'Test'
+
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
           node-version: 10
+
+      # https://github.com/samuelmeuli/action-electron-builder/blob/master/action.yml
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
         with:
@@ -30,4 +39,5 @@ jobs:
             build_script_name: build
             skip_build: false
             use_vue_cli: false
+            github_token: ${{ secrets.github_token }}
         
