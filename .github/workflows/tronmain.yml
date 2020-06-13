@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
+      - name: Change target directory
+        run: echo 'react-app'
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
