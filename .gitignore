@@ -1,0 +1,7 @@
+*.stackdump
+*node_modules
+*dist/*
+*build/*
+*.zip
+*.tar
+*.sample.*
